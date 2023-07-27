@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const db = require("./config/db_config");
+const mongoose = require("mongoose");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
@@ -34,8 +35,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Listen
-db.connect(process.env.MONGO_URI, () => {
-    console.log("Connected to DB!");
+db.connect(process.env.MONGO_URI)
+.then(() => {
 
     //starting server
     app.listen(PORT, () => {

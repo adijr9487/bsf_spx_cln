@@ -2,16 +2,14 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const saltRounds = 10;
-// const JWT = require("./JWTController");
 const JWT = require("./JWTController")
-const cookie = require("cookie");
 const errorHander = require("../handler/error");
 
 // ----------------------------------------------------Helper Functions-----------------------------------------------------
 
 //check if a user is exists or not
-const userExists = async (email, username) => {
-  const isUser = await User.findOne({ email: email });
+const userExists = async (username) => {
+  const isUser = await User.findOne({ username: username });
   return isUser;
 };
 
@@ -59,7 +57,6 @@ exports.isAuthenticated = async (req, res, next) => {
       });
     }
     req.user = await User.findById(user._id).select("-password");
-    // req.user = user;
     next();
   } catch (e) {
     errorHander.handleInternalServer(res);
@@ -73,8 +70,6 @@ exports.isAuthenticated = async (req, res, next) => {
 exports.signup = async (req, res) => {
   try {
     if (
-      !req.body.name ||
-      !req.body.email ||
       !req.body.username ||
       !req.body.password
     ) {
@@ -83,19 +78,7 @@ exports.signup = async (req, res) => {
       return;
     }
 
-    // Check if Email is Valid or not
-    let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    const result = await regex.test(req.body.email);
-    if (result === false) {
-      errorHander.handleBadRequest(res, "Invalid Email Address");
-      // res.status(400).send({ message: "Email is Badly Formatted" });
-      return;
-    }
-
     //Check if User is Already Exists
-    const isUser = await userExists(req.body.email);
-    if (isUser) return errorHander.handleConflict(res, "Email already in use.");
-
     const userName = await User.findOne({ username: req.body.username });
     if (userName)
       return errorHander.handleConflict(res, "Username already in use.");
@@ -105,8 +88,6 @@ exports.signup = async (req, res) => {
 
     // If User is not already exist and all fields are valid then we will save the user in our database
     const newUser = new User({
-      name: req.body.name,
-      email: req.body.email,
       username: req.body.username,
       password: await encryptPassword(req.body.password),
     });
@@ -115,7 +96,6 @@ exports.signup = async (req, res) => {
     // Get JWT token
     const err = JWT.setCookies(res, newUser);
     if (err) throw err;
-    // newUser.password = "";
     res.status(200).json({ _id: newUser._id });
   } catch (e) {
     errorHander.handleInternalServer(res);
@@ -125,18 +105,9 @@ exports.signup = async (req, res) => {
 
 exports.signin = async (req, res) => {
   try {
-    if (!req.body.email || !req.body.password) {
+    if (!req.body.username || !req.body.password) {
       return errorHander.handleBadRequest(res);
       // res.status(400).send({ message: "All fields is required" });
-    }
-
-    // Check if Email is Valid or not
-    let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    const result = await regex.test(req.body.email);
-    if (result === false) {
-      errorHander.handleBadRequest(res, "Invalid Email address");
-      // res.status(400).send({ message: "Email is Badly Formatted" });
-      return;
     }
 
     // Check if a User exists or not
