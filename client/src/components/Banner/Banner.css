@@ -1,0 +1,46 @@
+.vanish{
+    position: absolute;
+    top: 0;
+    animation: forwards vanish 0.3s ease-in-out;
+}
+
+.img-vanish{
+    animation: forwards img_vanish 1s ease-in-out;
+}
+.img-appear{
+    animation: forwards img_appear 0.3s ease-in-out;
+}
+.scroll:hover{
+    opacity: 0.9;
+}
+@keyframes vanish {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(150%);
+        display: none;
+    }
+}
+@keyframes img_vanish {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100%);
+        display: none;
+    }
+}
+@keyframes img_appear {
+    0% {
+        opacity: 0;
+        scale: 0.5;
+    }
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
+}

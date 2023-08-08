@@ -1,0 +1,12 @@
+.card-list::-webkit-scrollbar {
+    display: none;
+}
+.description::-webkit-scrollbar {
+    display: none;
+}
+.card{
+    transition: 0.3s;
+}
+.card:hover{
+    box-shadow: 0 0 10px #737373;
+}
