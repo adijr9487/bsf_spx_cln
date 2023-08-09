@@ -1,0 +1,22 @@
+.social-links a{
+    margin: 0 10px;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+    padding: 5px 0;
+}
+.social-links a:hover{
+    border-bottom: 1px solid #fff;
+}
+.footer-bottom-menu li{
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 5px 0;
+    font-size: 0.8rem;
+}
+.footer-bottom-menu li:hover{
+    color: white;
+}
+.footer-bottom-copyright{
+    font-size: 0.8rem;
+}
