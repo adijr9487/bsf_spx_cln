@@ -38,7 +38,7 @@ const CarousalCard = ({ vehicleData }) => {
             alt={vehicleData.title}
             className={`${
               direction == "right" ? "right-appear" : "left-appear"
-            } ${vehicleData.type == 'dragon' ? "max-w-none w-80" : ""}`}
+            }`}
           />
           {previousIndex != null && (
             <img

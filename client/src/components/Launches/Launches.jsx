@@ -131,7 +131,7 @@ let temp_data = [
 
 const Launches = () => {
   return (
-    <div className="h-screen relative" style={{ background: "#141414" }}>
+    <div className="h-screen relative flex " style={{ background: "#141414" }}>
       <h3
         className="absolute top-8 right-8 text-slate-50 uppercase"
         style={{ letterSpacing: "6px" }}
@@ -139,7 +139,7 @@ const Launches = () => {
         Launch Pad
       </h3>
       <div className="card-list overflow-scroll">
-        <div className="flex pt-12" style={{ width: "min-content" }}>
+        <div className="flex" style={{ width: "min-content" }}>
           {temp_data.map((item, index) => (
             <Card key={index} data={item} />
           ))}
