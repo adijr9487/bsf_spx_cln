@@ -138,7 +138,7 @@ const Launches = () => {
       >
         Launch Pad
       </h3>
-      <div className="card-list overflow-scroll">
+      <div className="card-list overflow-scroll flex items-center">
         <div className="flex" style={{ width: "min-content" }}>
           {temp_data.map((item, index) => (
             <Card key={index} data={item} />

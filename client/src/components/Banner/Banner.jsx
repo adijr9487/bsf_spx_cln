@@ -74,7 +74,7 @@ export default function Example() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-semibold leading-6 text-slate-300 transition-colors hover:text-white"
+                className="text-sm uppercase leading-6 text-neutral-300 transition-colors hover:text-white"
               >
                 {item.name}
               </a>
@@ -83,9 +83,9 @@ export default function Example() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
               href="#"
-              className="text-sm font-semibold leading-6 text-slate-300 transition-colors hover:text-white"
+              className="text-sm uppercase font-semibold leading-6 text-neutral-300 transition-colors hover:text-white"
             >
-              Log in <span aria-hidden="true">&rarr;</span>
+              Log in
             </a>
           </div>
         </nav>
@@ -96,7 +96,7 @@ export default function Example() {
           onClose={setMobileMenuOpen}
         >
           <div className="fixed inset-0 z-50 transition-all" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto px-6 py-6 sm:max-w-sm sm:ring-1 sm:bg-slate-900">
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto px-6 py-6 sm:max-w-sm bg-neutral-900">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
@@ -118,7 +118,7 @@ export default function Example() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-slate-300 hover:text-white"
+                      className="-mx-3 uppercase block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-slate-300 hover:text-white"
                     >
                       {item.name}
                     </a>
@@ -127,7 +127,7 @@ export default function Example() {
                 <div className="py-6">
                   <a
                     href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-slate-300 hover:text-white"
+                    className="-mx-3 block uppercase rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-slate-300 hover:text-white"
                   >
                     Log in
                   </a>
@@ -176,7 +176,7 @@ export default function Example() {
                   );
                   setTimeout(()=>{
                     setLeftQueue((prev) => {prev.pop(); return prev});
-                  }, 800)
+                  }, 1000)
                 }}
               >
                 <img src={arrow} alt="arrow" className="h-8 mx-auto" />
@@ -186,16 +186,15 @@ export default function Example() {
                   key={data[currentCarousel].title}
                   src={data[currentCarousel].image}
                   alt={data[currentCarousel].title}
-                  className="img-appear h-5/6 mx-auto hover:h-full transition-all absolute"
+                  className="z-10 img-appear h-5/6 mx-auto hover:h-full transition-all absolute"
                 />
-                {leftQueue.length && leftQueue.map((item, index) => (
+                {/* {leftQueue.length && leftQueue.map((item, index) => (
                   <img
-                    key={index}
                     src={data[item].image}
                     alt={data[item].title}
-                    className="img-vanish h-5/6 mx-auto hover:h-full transition-all absolute"
+                    className="z-10 img-vanish h-5/6 mx-auto hover:h-full transition-all absolute"
                   />
-                ))}
+                ))} */}
                 <h1
                   className="sm:text-4xl opacity-60 font-bold spacing-md"
                   style={{
