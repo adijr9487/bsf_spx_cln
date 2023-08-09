@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./Launches.css";
+import "./LaunchePad.css";
 import rocket from "../../Utility/Asset/rocket.svg";
 import location from "../../Utility/Asset/location.svg";
 
@@ -74,7 +74,7 @@ let temp_data = [
     attempted_landings: 16,
     wikipedia: "https://en.wikipedia.org/wiki/Autonomous_spaceport_drone_ship",
     details:
-      "The second ASDS barge, Of Course I Still Love You (OCISLY), had been under construction in a Louisiana shipyard since early 2015 using a different hull—Marmac 304—in order to service launches on the east coast. It was built as a replacement for the first Just Read the Instructions and entered operational service for Falcon 9 Flight 19 in late June 2015. As of June 2015, its home port was Jacksonville, Florida, but after December 2015, it was transferred 160 miles (260 km) further south, at Port Canaveral. While the dimensions of the ship are nearly identical to the first ASDS, several enhancements were made including a steel blast wall erected between the aft containers and the landing deck. The ship was in place for a first-stage landing test on the CRS-7 mission, which failed on launch on 28 June 2015. On 8 April 2016 the first stage, which launched the Dragon CRS-8 spacecraft, successfully landed for the first time ever on OCISLY, which is also the first ever drone ship landing. In February 2018, the Falcon Heavy Test Flight's central core exploded upon impact next to OCISLY that damaged two of the four thrusters on the drone ship. Two thrusters were removed from the Marmac 303 barge in order to repair OCISLY.",
+      "The second ASDS barge, Of Course I Still Love You (OCISLY), had been under construction in a Louisiana shipyard since early 2015 using a different hull—Marmac 304—in order to service launchePad on the east coast. It was built as a replacement for the first Just Read the Instructions and entered operational service for Falcon 9 Flight 19 in late June 2015. As of June 2015, its home port was Jacksonville, Florida, but after December 2015, it was transferred 160 miles (260 km) further south, at Port Canaveral. While the dimensions of the ship are nearly identical to the first ASDS, several enhancements were made including a steel blast wall erected between the aft containers and the landing deck. The ship was in place for a first-stage landing test on the CRS-7 mission, which failed on launch on 28 June 2015. On 8 April 2016 the first stage, which launched the Dragon CRS-8 spacecraft, successfully landed for the first time ever on OCISLY, which is also the first ever drone ship landing. In February 2018, the Falcon Heavy Test Flight's central core exploded upon impact next to OCISLY that damaged two of the four thrusters on the drone ship. Two thrusters were removed from the Marmac 303 barge in order to repair OCISLY.",
   },
   {
     id: "JRTI",
@@ -108,7 +108,7 @@ let temp_data = [
     attempted_landings: 2,
     wikipedia: "https://en.wikipedia.org/wiki/Autonomous_spaceport_drone_ship",
     details:
-      "The ASDS landing location for the first landing test was in the Atlantic approximately 200 miles (320 km) northeast of the launch location at Cape Canaveral, and 165 miles (266 km) southeast of Charleston, South Carolina. SpaceX's Just Read the Instructions, based on the Marmac 300 deck barge, in position for a landing test on Falcon 9 Flight 17 in April 2015. On 23 January 2015, during repairs to the ship following the unsuccessful first test, Musk announced that the ship was to be named Just Read the Instructions, with a sister ship planned for west coast launches to be named Of Course I Still Love You. On 29 January, SpaceX released a manipulated photo of the ship with the name illustrating how it would look once painted. Both ships are named after two General Contact Units, spaceships commanded by autonomous artificial intelligences, that appear in The Player of Games, a Culture novel by Iain M. Banks. The first Just Read the Instructions was retired in May 2015 after approximately six months of service in the Atlantic, and its duties were assumed by Of Course I Still Love You. The former ASDS was modified by removing the wing extensions that had extended the barge surface and the equipment (thrusters, cameras and communications gear) that had been added to refit it as an ASDS; these items were saved for future reuse.",
+      "The ASDS landing location for the first landing test was in the Atlantic approximately 200 miles (320 km) northeast of the launch location at Cape Canaveral, and 165 miles (266 km) southeast of Charleston, South Carolina. SpaceX's Just Read the Instructions, based on the Marmac 300 deck barge, in position for a landing test on Falcon 9 Flight 17 in April 2015. On 23 January 2015, during repairs to the ship following the unsuccessful first test, Musk announced that the ship was to be named Just Read the Instructions, with a sister ship planned for west coast launchePad to be named Of Course I Still Love You. On 29 January, SpaceX released a manipulated photo of the ship with the name illustrating how it would look once painted. Both ships are named after two General Contact Units, spaceships commanded by autonomous artificial intelligences, that appear in The Player of Games, a Culture novel by Iain M. Banks. The first Just Read the Instructions was retired in May 2015 after approximately six months of service in the Atlantic, and its duties were assumed by Of Course I Still Love You. The former ASDS was modified by removing the wing extensions that had extended the barge surface and the equipment (thrusters, cameras and communications gear) that had been added to refit it as an ASDS; these items were saved for future reuse.",
   },
   {
     id: "ASOG",
@@ -129,7 +129,7 @@ let temp_data = [
   },
 ];
 
-const Launches = () => {
+const LaunchePad = () => {
   return (
     <div className="h-screen relative flex " style={{ background: "#141414" }}>
       <h3
@@ -149,7 +149,7 @@ const Launches = () => {
   );
 };
 
-export default Launches;
+export default LaunchePad;
 
 const Card = ({ data }) => {
   console.log(data);
