@@ -3,6 +3,7 @@ import Banner from './components/Banner/Banner';
 import Launches from './components/Launches/Launches';
 import Vehicles from './components/Vehicles/Vehicles';
 import Timeline from './components/Timeline/Timeline';
+import Recent from './components/Recent/Recent';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Launches />
       <Vehicles />
       <Timeline />
+      <Recent />
     </div>
   );
 }
