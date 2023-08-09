@@ -1,0 +1,17 @@
+.expended{
+    height: 300px;
+}
+.details::-webkit-scrollbar {
+    width: 5px;
+}
+.details::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 10px;
+}
+.flight-details::-webkit-scrollbar {
+    width: 5px;
+}
+.flight-details::-webkit-scrollbar-thumb {
+    background: rgb(39, 39, 39); 
+    border-radius: 10px;
+}
