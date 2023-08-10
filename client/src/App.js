@@ -6,10 +6,12 @@ import Timeline from './components/Timeline/Timeline';
 import Recent from './components/Recent/Recent';
 import Footer from './components/Footer/Footer';
 import Launches from './components/Launches/Launches';
+import AuthPage from './components/AuthPage/AuthPage';
 
 function App() {
   return (
     <div>
+      <AuthPage />
       <Banner />
       <LaunchePad />
       <Vehicles />

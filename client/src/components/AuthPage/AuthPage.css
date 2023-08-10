@@ -1,0 +1,36 @@
+.AuthPage{
+    height: 100%;
+    width: 100%;
+}
+.backdrop{
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+}
+.form{
+    position: fixed;
+    border-radius: 4px;
+}
+.form label{
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+.form input{
+    padding: 5px 10px;
+    background-color: #313131;
+    border-radius: 2px;
+    outline: none;
+    color: white;
+    transition: 0.3s;
+}
+.form input:hover{
+    background-color: #464646;
+}
+.form input:focus{
+    background-color: #222222;
+}
+.form button{
+    text-transform: uppercase;
+}
