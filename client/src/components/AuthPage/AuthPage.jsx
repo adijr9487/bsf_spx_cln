@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../../Utility/Asset/Logo.svg";
 import "./AuthPage.css";
 
-const AuthPage = () => {
+const AuthPage = ({modelHandler}) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({email: null, password: null, confirmed: null});
   const [error, setError] = useState(null);
@@ -36,7 +36,7 @@ const AuthPage = () => {
   return (
     <div className="AuthPage z-20 absolute flex justify-center items-center">
       {/* backdrop  */}
-      <div className="backdrop" style={{ zIndex: "-100" }}></div>
+      <div className="backdrop" style={{ zIndex: "-100" }} onClick={modelHandler}></div>
 
       <form className="form bg-black p-16 w-96 transition-all duration-2">
         <>
