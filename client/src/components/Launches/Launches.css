@@ -1,0 +1,11 @@
+.items{
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+.items::-webkit-scrollbar {
+    width: 5px;
+}
+.items::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 10px;
+}

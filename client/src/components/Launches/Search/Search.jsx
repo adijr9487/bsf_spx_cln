@@ -1,8 +1,10 @@
 import React from "react";
 import "./Search.css";
 import search from "../../../Utility/Asset/search.svg";
+import cross from "../../../Utility/Asset/cross.svg";
+import loader from "../../../Utility/Asset/loader.svg";
 
-const Search = ({ onSearch }) => {
+const Search = ({ onSearch, isLoading }) => {
   const [searchData, setSearchData] = React.useState({
     input: null,
     year: null,
@@ -28,6 +30,7 @@ const Search = ({ onSearch }) => {
         <select
           id="year"
           name="yearlist"
+          value={searchData.year || "null"}
           onChange={(e) =>
             setSearchData((prev) => ({
               ...prev,
@@ -39,13 +42,16 @@ const Search = ({ onSearch }) => {
           {Array((new Date().getFullYear() % 100) + 1)
             .fill(0)
             .map((_, i) => (
-              <option key={i} value={i + 2000}>{i + 2000}</option>
+              <option key={i} value={i + 2000}>
+                {i + 2000}
+              </option>
             ))}
         </select>
 
         <select
           id="status"
           name="statuslist"
+          value={searchData.status || "null"}
           onChange={(e) =>
             setSearchData((prev) => ({
               ...prev,
@@ -54,13 +60,14 @@ const Search = ({ onSearch }) => {
           }
         >
           <option value="null">Status</option>
-          <option value="success">Succeed</option>
-          <option value="fail">Failed</option>
+          <option value="true">Succeed</option>
+          <option value="false">Failed</option>
         </select>
 
         <select
           id="type"
           name="typelist"
+          value={searchData.type || "null"}
           onChange={(e) =>
             setSearchData((prev) => ({
               ...prev,
@@ -73,11 +80,13 @@ const Search = ({ onSearch }) => {
           <option value="Merlin C">Merlin C</option>
           <option value="v1.0">v1.0</option>
           <option value="v1.1">v1.1</option>
+          <option value="FT">FT</option>
         </select>
 
         <select
           id="site"
           name="sitelist"
+          value={searchData.site || "null"}
           onChange={(e) =>
             setSearchData((prev) => ({
               ...prev,
@@ -93,11 +102,33 @@ const Search = ({ onSearch }) => {
 
         <div className="flex items-center">
           <img
-            src={search}
-            alt="search"
-            className="w-28 cursor-pointer"
-            onClick={() => onSearch(searchData)}
+            src={cross}
+            alt="cross"
+            className="w-12 cursor-pointer mx-1"
+            onClick={() =>
+              setSearchData({
+                input: null,
+                year: null,
+                status: null,
+                type: null,
+                site: null,
+              })
+            }
           />
+          {isLoading ? (
+            <img
+              src={loader}
+              alt="loader"
+              className="w-12 mx-1 loader"
+            />
+          ) : (
+            <img
+              src={search}
+              alt="search"
+              className="w-12 cursor-pointer mx-1"
+              onClick={() => onSearch(searchData)}
+            />
+          )}
         </div>
       </div>
     </div>

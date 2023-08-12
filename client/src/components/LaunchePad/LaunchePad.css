@@ -10,3 +10,40 @@
 .card:hover{
     box-shadow: 0 0 10px #737373;
 }
+.card-loader {
+    width: 300px;
+    background: #0f0f0f;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .card__content {
+    padding: 30px;
+  }
+  @keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
+  .card__image,
+.loading-h2,
+.loading-p {
+  background: linear-gradient(110deg, #1e1e1e 8%, #303030 18%, #262626 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1s shine linear infinite;
+}
+.card__image {
+  height: 200px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.card__content {
+  padding: 20px;
+}
+.loading-h2 {
+  height: 30px;
+}
+.loading-p {
+  height: 70px;
+  width: 80%;
+}

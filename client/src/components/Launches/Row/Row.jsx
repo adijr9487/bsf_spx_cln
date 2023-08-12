@@ -9,7 +9,7 @@ const Row = ({ isHeader, data }) => {
           return isHeader ? (
             <div key={index} style={{borderLeft: '1px solid #4c4c4c'}} className="uppercase border-y-0 px-4 py-1 w-full">{keys}</div>
           ) : (
-            <div key={index} style={{borderLeft: '1px solid #4c4c4c'}} className="uppercase border-y-0 px-4 py-1 w-full">{data[keys].toString()}</div>
+            <div key={index} style={{borderLeft: '1px solid #4c4c4c'}} className="uppercase border-y-0 px-4 py-1 w-full">{data[keys]}</div>
           );
         })}
       </div>
