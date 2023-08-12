@@ -45,7 +45,6 @@ const AuthPage = ({ modelHandler }) => {
         }
       )
       .then((res) => {
-        console.log(res);
         if (res.data._id) {
           setUser(res.data);
         }

@@ -20,10 +20,12 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({
-  origin: '*', // Replace with your frontend's origin
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use("/public", express.static(path.resolve(__dirname, "./public")));
 app.use(express.static(path.resolve(__dirname, "./client/build")));
@@ -40,11 +42,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Listen
-db.connect(process.env.MONGO_URI)
-.then(() => {
-
+db.connect(process.env.MONGO_URI).then(() => {
   //starting server
   app.listen(PORT, () => {
     console.log("Server is up and running! PORT=", PORT);
   });
-})
+});

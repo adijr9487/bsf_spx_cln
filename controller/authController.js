@@ -101,10 +101,8 @@ exports.signup = async (req, res) => {
 
 exports.signin = async (req, res) => {
   try {
-    // console.log(req.cookies, "cookies");
     if (!req.body.email || !req.body.password) {
-      // console.log(res)
-      return errorHandler.handleBadRequest(res, 'All fields is required');
+      return errorHandler.handleBadRequest(res, "All fields is required");
     }
 
     // Check if a User exists or not

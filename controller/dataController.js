@@ -19,13 +19,13 @@ exports.getLaunchPadData = async (req, res) => {
         full_name: launchPad.full_name,
         status: launchPad.status,
         location: launchPad.location,
-        attempts: launchPad.launch_attempts,
-        successes: launchPad.launch_successes,
+        attempts: launchPad.attempted_launches,
+        successes: launchPad.successful_launches,
         details: launchPad.details,
       };
     });
 
-    res.send(launchPadData);
+    res.status(200).json({ data: launchPadData });
   } catch (error) {
     errorHandler.handleNotFound(res); // Handle the error appropriately
   }
@@ -46,7 +46,7 @@ exports.getLaunchHistory = async (req, res) => {
         flight_number: history_item.flight_number,
       };
     });
-    res.send(mappedHistory);
+    res.status(200).json({ data: mappedHistory });
   } catch (error) {
     errorHandler.handleNotFound(res);
   }
@@ -71,7 +71,7 @@ exports.getLaunchByFlightNumber = async (req, res) => {
       details: launchData.details,
     };
 
-    res.send(launchDetails);
+    res.status(200).json({ data: launchDetails });
   } catch (error) {
     errorHandler.handleNotFound(res); // Handle the error appropriately
   }
@@ -79,41 +79,68 @@ exports.getLaunchByFlightNumber = async (req, res) => {
 
 exports.getMission = async (req, res) => {
   try {
-    const { year, status, type, site } = req.params;
+    const { search, year, status, type, site } = req.params;
     const response = await axios.get("https://api.spacexdata.com/v3/launches");
-    const missionData = response.data.map((mission) => {
-      const formattedDate = formatDate(mission.launch_date_utc);
-      if (year != null) {
-        if (year != formattedDate.getFullYear()) {
-          return null;
+    const missionData = response.data
+      .map((mission) => {
+        const formattedDate = formatDate(mission.launch_date_utc);
+        if (year != "null") {
+          if (year != Number(mission.launch_year)) {
+            return null;
+          }
         }
-      }
-      if (status != null) {
-        if (status != mission.launch_success) {
-          return null;
+        if (status != "null") {
+          if (status != String(mission.launch_success)) {
+            return null;
+          }
         }
-      }
-      if (type != null) {
-        if (type != mission.rocket.rocket_type) {
-          return null;
+        if (type != "null") {
+          if (type != mission.rocket.rocket_type) {
+            return null;
+          }
         }
-      }
-      if (site != null) {
-        if (site != mission.launch_site.site_name_long) {
-          return null;
+        if (site != "null") {
+          if (site != mission.launch_site.site_name) {
+            return null;
+          }
         }
-      }
-      return {
-        id: mission.flight_number,
-        mission_name: mission.mission_name,
-        launch_date: formattedDate,
-        rocket_name: mission.rocket.rocket_name,
-        site_long_name: mission.launch_site.site_long_name,
-        details: mission.details,
-      };
-    });
 
-    res.send(missionData);
+        if (search != "null") {
+          if (
+            !mission.mission_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) &&
+            !mission.rocket.rocket_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) &&
+            !mission.rocket.rocket_type
+              .toLowerCase()
+              .includes(search.toLowerCase()) &&
+            !mission.launch_site.site_name_long
+              .toLowerCase()
+              .includes(search.toLowerCase()) &&
+            !mission.rocket.rocket_type
+              .toLowerCase()
+              .includes(search.toLowerCase()) &&
+            !mission.launch_site.site_name
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          ) {
+            return null;
+          }
+        }
+        return {
+          id: mission.flight_number,
+          mission_name: mission.mission_name,
+          launch_date: formattedDate,
+          rocket_name: mission.rocket.rocket_name,
+          site_long_name: mission.launch_site.site_long_name,
+        };
+      })
+      .filter((mission) => {
+        return mission != null;
+      });
+    res.status(200).json({ data: missionData });
   } catch (error) {
     errorHandler.handleNotFound(res); // Handle the error appropriately
   }

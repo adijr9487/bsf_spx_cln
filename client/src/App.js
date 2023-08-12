@@ -21,7 +21,6 @@ function App() {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
         if (res.status == 200) {
           setUser(() => {
             return {
@@ -42,13 +41,12 @@ function App() {
 
   return (
     <div>
-      {console.log(user)}
       {!user && <AuthPage />}
       <Banner />
       <LaunchePad />
       <Vehicles />
       <Timeline />
-      <Recent />
+      {/* <Recent /> */}
       <Launches />
       <Footer />
     </div>
