@@ -6,7 +6,6 @@ const CarousalCard = ({ vehicleData }) => {
   const [previousIndex, setPreviousIndex] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("center");
-  console.log(vehicleData);
   return (
     <div className="vehicle-card w-44 flex flex-col items-center pt-4">
       <div

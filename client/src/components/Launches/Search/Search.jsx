@@ -39,7 +39,7 @@ const Search = ({ onSearch }) => {
           {Array((new Date().getFullYear() % 100) + 1)
             .fill(0)
             .map((_, i) => (
-              <option value={i + 2000}>{i + 2000}</option>
+              <option key={i} value={i + 2000}>{i + 2000}</option>
             ))}
         </select>
 

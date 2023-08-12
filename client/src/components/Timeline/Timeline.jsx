@@ -321,6 +321,7 @@ const Timeline = () => {
         {data.map((item, index) => {
           return (
             <div
+            key={index}
               className="time-line-box px-6 border-t border-neutral-500 flex flex-col items-center shrink-0"
               style={{ width: "400px" }}
             >

@@ -152,7 +152,6 @@ const LaunchePad = () => {
 export default LaunchePad;
 
 const Card = ({ data }) => {
-  console.log(data);
   return (
     <div
       className="card m-8 p-2 bg-black text-white"

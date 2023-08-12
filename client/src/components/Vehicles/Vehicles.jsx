@@ -118,9 +118,9 @@ const Vehicles = () => {
         </div>
         <div className="vehicle-body m-auto flex">  
           <div className="vehicle-body m-auto w-4/5 flex justify-evenly">
-            {data.map((vehicleData) => {
+            {data.map((vehicleData, index) => {
               if (selectedVehicle == vehicleData.type){
-                return <CarousalCard vehicleData={vehicleData} />;
+                return <CarousalCard key={index} vehicleData={vehicleData} />;
               }
               return null;
             })}
