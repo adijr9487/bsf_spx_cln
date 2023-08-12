@@ -2,14 +2,14 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const saltRounds = 10;
-const JWT = require("./JWTController")
-const errorHander = require("../handler/error");
+const JWT = require("./JWTController");
+const errorHandler = require("../handler/error");
 
 // ----------------------------------------------------Helper Functions-----------------------------------------------------
 
 //check if a user is exists or not
-const userExists = async (username) => {
-  const isUser = await User.findOne({ username: username });
+const userExists = async (email) => {
+  const isUser = await User.findOne({ email: email });
   return isUser;
 };
 
@@ -35,7 +35,7 @@ exports.isAuthenticated = async (req, res, next) => {
     const refreshToken = req.cookies.refresh;
     if (!token && !refreshToken) {
       // res.status(403).json({ error: "Unverified user" });
-      errorHander.handleUnauthorized(res);
+      errorHandler.handleUnauthorized(res);
       return;
     }
     let user = JWT.verifyToken(token);
@@ -43,7 +43,7 @@ exports.isAuthenticated = async (req, res, next) => {
       const access = await JWT.regenerateAccessToken(refreshToken);
       if (!access) {
         // res.status(403).json({ error: "Invalid Token" });
-        errorHander.handleUnauthorized(res);
+        errorHandler.handleUnauthorized(res);
         return;
       }
       user = JWT.verifyToken(access);
@@ -59,7 +59,7 @@ exports.isAuthenticated = async (req, res, next) => {
     req.user = await User.findById(user._id).select("-password");
     next();
   } catch (e) {
-    errorHander.handleInternalServer(res);
+    errorHandler.handleInternalServer(res);
   }
 };
 
@@ -69,26 +69,22 @@ exports.isAuthenticated = async (req, res, next) => {
 
 exports.signup = async (req, res) => {
   try {
-    if (
-      !req.body.username ||
-      !req.body.password
-    ) {
-      errorHander.handleBadRequest(res);
+    if (!req.body.email || !req.body.password) {
+      errorHandler.handleBadRequest(res);
       // res.status(400).send({ message: "All fields is required" });
       return;
     }
 
     //Check if User is Already Exists
-    const userName = await User.findOne({ username: req.body.username });
-    if (userName)
-      return errorHander.handleConflict(res, "Username already in use.");
+    const email = await User.findOne({ email: req.body.email });
+    if (email) return errorHandler.handleConflict(res, "email already in use.");
     // return res
     //   .status(409)
     //   .send({ message: "User Already Exist. Please Login" });
 
     // If User is not already exist and all fields are valid then we will save the user in our database
     const newUser = new User({
-      username: req.body.username,
+      email: req.body.email,
       password: await encryptPassword(req.body.password),
     });
     await newUser.save();
@@ -98,39 +94,41 @@ exports.signup = async (req, res) => {
     if (err) throw err;
     res.status(200).json({ _id: newUser._id });
   } catch (e) {
-    errorHander.handleInternalServer(res);
+    errorHandler.handleInternalServer(res);
     // res.json({ error: e || "Someting went wrong" });
   }
 };
 
 exports.signin = async (req, res) => {
   try {
-    if (!req.body.username || !req.body.password) {
-      return errorHander.handleBadRequest(res);
-      // res.status(400).send({ message: "All fields is required" });
+    // console.log(req.cookies, "cookies");
+    if (!req.body.email || !req.body.password) {
+      // console.log(res)
+      return errorHandler.handleBadRequest(res, 'All fields is required');
     }
 
     // Check if a User exists or not
     const user = await userExists(req.body.email);
-
     //If user does not exists then throw error
-    if (!user) return errorHander.handleNotFound(res, "Invalid Credentials");
-    // return res
-    //   .status(400)
-    //   .send({ message: "User does not exists. Please Signup" });
+
+    if (!user)
+      return errorHandler.handleNotFound(
+        res,
+        "Invalid Credentials or User does not exists"
+      );
 
     // Check the password is correct or not
     const compareHashedPassword = await comparePassword(
       req.body.password,
       user.password
     );
+
     if (!compareHashedPassword)
-      return errorHander.handleBadRequest(res, "Invalid Credentials");
+      return errorHandler.handleBadRequest(res, "Invalid Credentials");
     // return res.status(400).send({ message: "Invalid Credentials" });
     //set a token
     const err = JWT.setCookies(res, user);
     if (err) throw err;
-    // user.password = "";
     res.status(200).json({ _id: user._id });
   } catch (e) {
     res.json({ error: e || "Something went wrong" });

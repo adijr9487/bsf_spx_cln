@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../Utility/Asset/Logo.svg";
@@ -7,6 +7,7 @@ import falcon from "../../Utility/Asset/falcon.svg";
 import arrow from "../../Utility/Asset/arrow.svg";
 import dragon from "../../Utility/Asset/dragon.svg";
 import "./Banner.css";
+import { UserContext } from "../../context/UserContext";
 
 const navigation = [
   { name: "Home", href: "#" },
@@ -37,6 +38,8 @@ export default function Example() {
   const [currentCarousel, setCurrentCarousel] = useState(0);
   const [leftQueue, setLeftQueue] = useState([]);
   const [transition, setTransition] = useState(false);
+  const { user, setUser } = useContext(UserContext);
+
   return (
     <div
       style={{
@@ -80,14 +83,16 @@ export default function Example() {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="#"
-              className="text-sm uppercase font-semibold leading-6 text-neutral-300 transition-colors hover:text-white"
-            >
-              Log in
-            </a>
-          </div>
+          {!user && (
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              <a
+                href="#"
+                className="text-sm uppercase font-semibold leading-6 text-neutral-300 transition-colors hover:text-white"
+              >
+                Log in
+              </a>
+            </div>
+          )}
         </nav>
         <Dialog
           as="div"
@@ -124,14 +129,16 @@ export default function Example() {
                     </a>
                   ))}
                 </div>
-                <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block uppercase rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-slate-300 hover:text-white"
-                  >
-                    Log in
-                  </a>
-                </div>
+                {!user && (
+                  <div className="py-6">
+                    <a
+                      href="#"
+                      className="-mx-3 block uppercase rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-slate-300 hover:text-white"
+                    >
+                      Log in
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </Dialog.Panel>
@@ -174,9 +181,12 @@ export default function Example() {
                       ? data.length - 1
                       : currentCarousel - 1
                   );
-                  setTimeout(()=>{
-                    setLeftQueue((prev) => {prev.pop(); return prev});
-                  }, 1000)
+                  setTimeout(() => {
+                    setLeftQueue((prev) => {
+                      prev.pop();
+                      return prev;
+                    });
+                  }, 1000);
                 }}
               >
                 <img src={arrow} alt="arrow" className="h-8 mx-auto" />
@@ -214,9 +224,12 @@ export default function Example() {
                   setCurrentCarousel((prev) =>
                     currentCarousel === 1 ? 0 : currentCarousel + 1
                   );
-                  setTimeout(()=>{
-                    setLeftQueue((prev) => {prev.pop(); return prev});
-                  }, 800)
+                  setTimeout(() => {
+                    setLeftQueue((prev) => {
+                      prev.pop();
+                      return prev;
+                    });
+                  }, 800);
                 }}
               >
                 <img src={arrow} alt="arrow" className="h-8 mx-auto" />
@@ -224,12 +237,12 @@ export default function Example() {
             </div>
             <div className="scroll w-full">
               <img
-              onClick={()=>{
-                window.scrollTo({
-                  top: window.innerHeight,
-                  behavior: 'smooth', // Optional: Adds smooth scrolling animation
-                })
-              }}
+                onClick={() => {
+                  window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: "smooth", // Optional: Adds smooth scrolling animation
+                  });
+                }}
                 src={arrow}
                 alt="arrow"
                 className="h-8 mx-auto opacity-60 cursor-pointer"
