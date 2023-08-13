@@ -5,7 +5,7 @@ import "./AuthPage.css";
 import Notify from "../../Utility/helper-component/Notify/Notify";
 import { NotifyContext } from "../../context/NotifyContext";
 
-const AuthPage = ({ modelHandler }) => {
+const AuthPage = ({ closeModel }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: null,
@@ -71,7 +71,7 @@ const AuthPage = ({ modelHandler }) => {
       <div
         className="backdrop"
         style={{ zIndex: "-100" }}
-        onClick={modelHandler}
+        onClick={closeModel}
       ></div>
       <form className="form bg-black p-16 w-96 transition-all duration-2">
         <>

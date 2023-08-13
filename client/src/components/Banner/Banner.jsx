@@ -36,7 +36,7 @@ const data = [
 
 const carouselLength = data.length;
 
-export default function Example() {
+const Banner = ({ viewModel }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentCarousel, setCurrentCarousel] = useState(0);
   const [leftQueue, setLeftQueue] = useState([]);
@@ -107,25 +107,25 @@ export default function Example() {
                 {item.name}
               </a>
             ))}
-            {user && (
+          </div>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            {user ? (
               <a
                 onClick={logoutHandler}
                 className="cursor-pointer text-sm uppercase leading-6 text-neutral-300 transition-colors hover:text-white"
               >
                 Logout
               </a>
-            )}
-          </div>
-          {!user && (
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            ) : (
               <a
+                onClick={viewModel}
                 href="#"
                 className="text-sm uppercase font-semibold leading-6 text-neutral-300 transition-colors hover:text-white"
               >
                 Log in
               </a>
-            </div>
-          )}
+            )}
+          </div>
         </nav>
         <Dialog
           as="div"
@@ -165,8 +165,10 @@ export default function Example() {
                 {!user && (
                   <div className="py-6">
                     <a
-                      onClick={() => setMobileMenuOpen(false)}
-                      href="#"
+                      onClick={() => {
+                        viewModel();
+                        setMobileMenuOpen(false);
+                      }}
                       className="-mx-3 block uppercase rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-slate-300 hover:text-white"
                     >
                       Log in
@@ -299,4 +301,6 @@ export default function Example() {
       </div>
     </div>
   );
-}
+};
+
+export default Banner;

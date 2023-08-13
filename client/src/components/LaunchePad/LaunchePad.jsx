@@ -7,7 +7,7 @@ import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 
 const LaunchePad = () => {
-  const [data, setData] = useState([{}, {}, {}]);
+  const [data, setData] = useState([{}, {}, {}, {}]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
 
@@ -28,7 +28,7 @@ const LaunchePad = () => {
         setLoading(false);
       })
       .catch((err) => {
-        setData([{}, {}, {}]);
+        setData([{}, {}, {}, {}]);
         console.log(err);
         setLoading(false);
       });

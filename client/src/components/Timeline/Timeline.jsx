@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Timeline.css";
 import TimelineCard from "./TimelineCard/TimelineCard";
 import axios from "axios";
-
+import { UserContext } from "../../context/UserContext";
 
 const Timeline = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { user } = useContext(UserContext);
 
   const fetchData = () => {
     setLoading(true);
     axios
-    .post(
-      "http://localhost:5000/api/spacex/history",
-      {},
-      { withCredentials: true }
-    )
-    .then((res) => {
-      setData(res.data.data);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.log(err);
-      setLoading(false);
-    });
+      .post(
+        "http://localhost:5000/api/spacex/history",
+        {},
+        { withCredentials: true }
+      )
+      .then((res) => {
+        setData(res.data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (user) {
+      fetchData();
+    } else {
+      setData([{}, {}, {}, {}]);
+    }
+  }, [user]);
 
   return (
     <div
@@ -54,7 +59,17 @@ const Timeline = () => {
                 className="bg-white rounded-full h-8 w-8 my-4"
                 style={{ marginTop: "-16px" }}
               ></div>
-              <TimelineCard data={item} />
+              {user ? (
+                <TimelineCard data={item} />
+              ) : (
+                <div class="card-loader m-8">
+                  <div class="card__image"></div>
+                  <div class="card__content">
+                    <h2 className="loading-h2 my-4"></h2>
+                    <p className="loading-p"></p>
+                  </div>
+                </div>
+              )}
             </div>
           );
         })}
