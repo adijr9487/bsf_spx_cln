@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 import "./AuthPage.css";
+import Notify from "../../Utility/helper-component/Notify/Notify";
+import { NotifyContext } from "../../context/NotifyContext";
 
 const AuthPage = ({ modelHandler }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,8 +12,10 @@ const AuthPage = ({ modelHandler }) => {
     password: null,
     confirmed: null,
   });
+  const [notif, setNotif] = useState(null);
   const [error, setError] = useState(null);
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
+  const { notify, setNotify } = useContext(NotifyContext);
 
   const validator = (data) => {
     if (!data.email || !data.password) {
@@ -47,10 +51,17 @@ const AuthPage = ({ modelHandler }) => {
       .then((res) => {
         if (res.data._id) {
           setUser(res.data);
+          setNotify({
+            color: 'bg-green-700',
+            message: 'Logged In successfully'
+          });
         }
       })
       .catch((err) => {
-        setError(err.response.data.message);
+        setNotify({
+          color: 'bg-red-700',
+          message: err.response.data.message
+        });
       });
   };
 
@@ -62,7 +73,6 @@ const AuthPage = ({ modelHandler }) => {
         style={{ zIndex: "-100" }}
         onClick={modelHandler}
       ></div>
-
       <form className="form bg-black p-16 w-96 transition-all duration-2">
         <>
           <div>

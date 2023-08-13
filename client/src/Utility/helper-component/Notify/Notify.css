@@ -1,0 +1,25 @@
+.notify-box{
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    z-index: 9999;
+    animation: notify-box 0.2s ease-in-out;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out;
+}
+@keyframes notify-box {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}

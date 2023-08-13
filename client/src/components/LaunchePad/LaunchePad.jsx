@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import "./LaunchePad.css";
 import rocket from "../../Utility/Asset/svgs/rocket.svg";
 import location from "../../Utility/Asset/svgs/location.svg";
 import axios from "axios";
+import { UserContext } from "../../context/UserContext";
 
 const LaunchePad = () => {
   const [data, setData] = useState([{}, {}, {}]);
   const [loading, setLoading] = useState(true);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [user]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -26,13 +28,18 @@ const LaunchePad = () => {
         setLoading(false);
       })
       .catch((err) => {
+        setData([{}, {}, {}]);
         console.log(err);
         setLoading(false);
       });
   };
 
   return (
-    <div id="launch_pad" className="h-screen relative flex " style={{ background: "#141414" }}>
+    <div
+      id="launch_pad"
+      className="h-screen relative flex "
+      style={{ background: "#141414" }}
+    >
       <h3
         className="page-head absolute top-8 right-8 text-slate-50 uppercase"
         style={{ letterSpacing: "6px" }}

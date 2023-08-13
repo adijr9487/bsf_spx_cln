@@ -8,8 +8,9 @@ import arrow from "../../Utility/Asset/svgs/arrow.svg";
 import dragon from "../../Utility/Asset/svgs/dragon.svg";
 import "./Banner.css";
 import { UserContext } from "../../context/UserContext";
+import { NotifyContext } from "../../context/NotifyContext";
 import axios from "axios";
-import Error from "../../Utility/helper-component/Error/Error";
+import Notify from "../../Utility/helper-component/Notify/Notify";
 
 const navigation = [
   { name: "Launch Pad", href: "#launch_pad" },
@@ -40,23 +41,27 @@ export default function Example() {
   const [currentCarousel, setCurrentCarousel] = useState(0);
   const [leftQueue, setLeftQueue] = useState([]);
   const { user, setUser } = useContext(UserContext);
-  const [error, setError] = useState(null);
-
+  const { setNotify } = useContext(NotifyContext);
   const logoutHandler = () => {
     axios
       .post(
         "http://localhost:5000/api/auth/logout",
         {},
-        { useCredentials: true }
+        { withCredentials: true }
       )
       .then((res) => {
+        console.log(res);
         setUser(null);
+        setNotify({
+          color: "bg-green-700",
+          message: "Logged out successfully",
+        });
       })
       .catch((err) => {
-        setError(err);
-        setTimeout(() => {
-          setError(null);
-        }, 4000);
+        setNotify({
+          color: "bg-red-700",
+          message: "Error in logout",
+        });
       });
   };
 
@@ -68,7 +73,6 @@ export default function Example() {
         height: "100vh",
       }}
     >
-      {error && <Error color="bg-red-700">{error}</Error>}
       <div
         className="opacity-60 bg-gray-900"
         style={{ height: "100vh", width: "100%", position: "absolute" }}
@@ -106,7 +110,7 @@ export default function Example() {
             {user && (
               <a
                 onClick={logoutHandler}
-                className="text-sm uppercase leading-6 text-neutral-300 transition-colors hover:text-white"
+                className="cursor-pointer text-sm uppercase leading-6 text-neutral-300 transition-colors hover:text-white"
               >
                 Logout
               </a>
@@ -161,16 +165,20 @@ export default function Example() {
                 {!user && (
                   <div className="py-6">
                     <a
+                      onClick={() => setMobileMenuOpen(false)}
                       href="#"
                       className="-mx-3 block uppercase rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-slate-300 hover:text-white"
                     >
                       Log in
                     </a>
-                  </div>  
+                  </div>
                 )}
                 {user && (
                   <a
-                    onClick={logoutHandler}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      logoutHandler();
+                    }}
                     className="-mx-3 block uppercase rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-slate-300 hover:text-white"
                   >
                     Logout
