@@ -18,7 +18,6 @@ const Launches = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
         setData(res.data.data);
         setLoading(false);
       })

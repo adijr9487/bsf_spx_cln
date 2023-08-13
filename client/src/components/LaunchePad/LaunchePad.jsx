@@ -5,11 +5,13 @@ import rocket from "../../Utility/Asset/svgs/rocket.svg";
 import location from "../../Utility/Asset/svgs/location.svg";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
+import { NotifyContext } from "../../context/NotifyContext";
 
 const LaunchePad = () => {
   const [data, setData] = useState([{}, {}, {}, {}]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
+  const { setNotify } = useContext(NotifyContext);
 
   useEffect(() => {
     fetchData();
@@ -29,7 +31,10 @@ const LaunchePad = () => {
       })
       .catch((err) => {
         setData([{}, {}, {}, {}]);
-        console.log(err);
+        setNotify({
+          color: "bg-red-700",
+          message: err.response.data.message,
+        });
         setLoading(false);
       });
   };
@@ -61,9 +66,9 @@ export default LaunchePad;
 
 const Card = ({ data }) => {
   return Object.keys(data).length == 0 ? (
-    <div class="card-loader m-8">
-      <div class="card__image"></div>
-      <div class="card__content">
+    <div className="card-loader m-8">
+      <div className="card__image"></div>
+      <div className="card__content">
         <h2 className="loading-h2 my-4"></h2>
         <p className="loading-p"></p>
       </div>
@@ -76,8 +81,10 @@ const Card = ({ data }) => {
     >
       <>
         <div className="map">
-          {console.log(data.location.latitude, data.location.longitude)}
-          <img src={`https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/${data.location.longitude},${data.location.latitude},10,0/300x200?access_token=pk.eyJ1IjoiYWRpanI5NDg3IiwiYSI6ImNsa3lvd3A2MzB2Z3gzZW4wemppODNkbnkifQ.ntYqIZEZDpXB3LdGkY7o_w`} alt="map" />
+          <img
+            src={`https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/${data.location.longitude},${data.location.latitude},10,0/300x200?access_token=pk.eyJ1IjoiYWRpanI5NDg3IiwiYSI6ImNsa3lvd3A2MzB2Z3gzZW4wemppODNkbnkifQ.ntYqIZEZDpXB3LdGkY7o_w`}
+            alt="map"
+          />
         </div>
         <div className="card-body p-4">
           <div className="location flex">

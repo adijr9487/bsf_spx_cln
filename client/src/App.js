@@ -39,7 +39,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setNotify(err.response.data.message);
       });
   };
 
@@ -61,7 +61,7 @@ function App() {
       {!user && showModel && (
         <AuthPage closeModel={() => setShowModel(false)} />
       )}
-      <Banner viewModel={()=>setShowModel(true)}/>
+      <Banner viewModel={() => setShowModel(true)} />
       <LaunchePad />
       <Vehicles />
       <Timeline />

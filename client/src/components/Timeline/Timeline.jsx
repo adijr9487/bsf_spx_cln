@@ -62,9 +62,9 @@ const Timeline = () => {
               {user ? (
                 <TimelineCard data={item} />
               ) : (
-                <div class="card-loader m-8">
-                  <div class="card__image"></div>
-                  <div class="card__content">
+                <div className="card-loader m-8">
+                  <div className="card__image"></div>
+                  <div className="card__content">
                     <h2 className="loading-h2 my-4"></h2>
                     <p className="loading-p"></p>
                   </div>
