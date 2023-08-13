@@ -76,7 +76,8 @@ const Card = ({ data }) => {
     >
       <>
         <div className="map">
-          <img src={"https://picsum.photos/300/200"} alt="map" />
+          {console.log(data.location.latitude, data.location.longitude)}
+          <img src={`https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/${data.location.longitude},${data.location.latitude},10,0/300x200?access_token=pk.eyJ1IjoiYWRpanI5NDg3IiwiYSI6ImNsa3lvd3A2MzB2Z3gzZW4wemppODNkbnkifQ.ntYqIZEZDpXB3LdGkY7o_w`} alt="map" />
         </div>
         <div className="card-body p-4">
           <div className="location flex">
