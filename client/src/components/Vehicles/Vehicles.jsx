@@ -78,7 +78,7 @@ const Vehicles = () => {
   const [selectedVehicle, setSelectedVehicle] = useState("falcon");
 
   return (
-    <div className="h-screen bg-black relative">
+    <div id="vehicle" className="h-screen bg-black relative">
       <h3
         className="page-head absolute top-8 right-8 text-slate-50 uppercase"
         style={{ letterSpacing: "6px" }}

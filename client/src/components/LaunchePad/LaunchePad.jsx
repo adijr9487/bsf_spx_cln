@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./LaunchePad.css";
-import rocket from "../../Utility/Asset/rocket.svg";
-import location from "../../Utility/Asset/location.svg";
+import rocket from "../../Utility/Asset/svgs/rocket.svg";
+import location from "../../Utility/Asset/svgs/location.svg";
 import axios from "axios";
 
 const LaunchePad = () => {
@@ -32,7 +32,7 @@ const LaunchePad = () => {
   };
 
   return (
-    <div className="h-screen relative flex " style={{ background: "#141414" }}>
+    <div id="launch_pad" className="h-screen relative flex " style={{ background: "#141414" }}>
       <h3
         className="page-head absolute top-8 right-8 text-slate-50 uppercase"
         style={{ letterSpacing: "6px" }}

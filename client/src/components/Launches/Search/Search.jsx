@@ -1,8 +1,8 @@
 import React from "react";
 import "./Search.css";
-import search from "../../../Utility/Asset/search.svg";
-import cross from "../../../Utility/Asset/cross.svg";
-import loader from "../../../Utility/Asset/loader.svg";
+import search from "../../../Utility/Asset/svgs/search.svg";
+import cross from "../../../Utility/Asset/svgs/cross.svg";
+import loader from "../../../Utility/Asset/svgs/loader.svg";
 
 const Search = ({ onSearch, isLoading }) => {
   const [searchData, setSearchData] = React.useState({

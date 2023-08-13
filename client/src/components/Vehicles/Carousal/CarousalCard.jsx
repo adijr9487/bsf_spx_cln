@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import arrow from "../../../Utility/Asset/arrow.svg";
+import arrow from "../../../Utility/Asset/svgs/arrow.svg";
 import "./CarousalCard.css";
 
 const CarousalCard = ({ vehicleData }) => {
