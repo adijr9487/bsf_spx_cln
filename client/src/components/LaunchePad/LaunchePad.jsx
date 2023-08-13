@@ -34,7 +34,7 @@ const LaunchePad = () => {
   return (
     <div className="h-screen relative flex " style={{ background: "#141414" }}>
       <h3
-        className="absolute top-8 right-8 text-slate-50 uppercase"
+        className="page-head absolute top-8 right-8 text-slate-50 uppercase"
         style={{ letterSpacing: "6px" }}
       >
         Launch Pad

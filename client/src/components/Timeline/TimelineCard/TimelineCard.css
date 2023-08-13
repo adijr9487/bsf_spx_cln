@@ -15,3 +15,13 @@
     background: rgb(39, 39, 39); 
     border-radius: 10px;
 }
+@media(max-width: 500px){
+    .expended{
+        height: 200px
+    }
+}
+@media(max-width: 400px){
+    .box{
+        width: 300px;
+    }
+}

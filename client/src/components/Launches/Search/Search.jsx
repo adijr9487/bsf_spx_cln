@@ -14,7 +14,7 @@ const Search = ({ onSearch, isLoading }) => {
   });
 
   return (
-    <div className="search flex w-full justify-between px-20">
+    <div className="search flex w-full justify-between px-4 sm:px-20">
       <input
         type="text"
         placeholder="Search"
@@ -27,108 +27,109 @@ const Search = ({ onSearch, isLoading }) => {
         value={searchData.input || ""}
       />
       <div className="options flex justify-between w-full">
-        <select
-          id="year"
-          name="yearlist"
-          value={searchData.year || "null"}
-          onChange={(e) =>
-            setSearchData((prev) => ({
-              ...prev,
-              year: e.target.value,
-            }))
-          }
-        >
-          <option value="null">Year</option>
-          {Array((new Date().getFullYear() % 100) + 1)
-            .fill(0)
-            .map((_, i) => (
-              <option key={i} value={i + 2000}>
-                {i + 2000}
-              </option>
-            ))}
-        </select>
-
-        <select
-          id="status"
-          name="statuslist"
-          value={searchData.status || "null"}
-          onChange={(e) =>
-            setSearchData((prev) => ({
-              ...prev,
-              status: e.target.value,
-            }))
-          }
-        >
-          <option value="null">Status</option>
-          <option value="true">Succeed</option>
-          <option value="false">Failed</option>
-        </select>
-
-        <select
-          id="type"
-          name="typelist"
-          value={searchData.type || "null"}
-          onChange={(e) =>
-            setSearchData((prev) => ({
-              ...prev,
-              type: e.target.value,
-            }))
-          }
-        >
-          <option value="null">Type</option>
-          <option value="Merlin A">Merlin A</option>
-          <option value="Merlin C">Merlin C</option>
-          <option value="v1.0">v1.0</option>
-          <option value="v1.1">v1.1</option>
-          <option value="FT">FT</option>
-        </select>
-
-        <select
-          id="site"
-          name="sitelist"
-          value={searchData.site || "null"}
-          onChange={(e) =>
-            setSearchData((prev) => ({
-              ...prev,
-              site: e.target.value,
-            }))
-          }
-        >
-          <option value="null">Site</option>
-          <option value="KSC LC 39A">KSC LC 39A</option>
-          <option value="CCAFS SLC 40">CCAFS SLC 40</option>
-          <option value="VAFB SLC 4E">VAFB SLC 4E</option>
-        </select>
-
-        <div className="flex items-center">
-          <img
-            src={cross}
-            alt="cross"
-            className="w-12 cursor-pointer mx-1"
-            onClick={() =>
-              setSearchData({
-                input: null,
-                year: null,
-                status: null,
-                type: null,
-                site: null,
-              })
+        <div className="flex">
+          <select
+            id="year"
+            name="yearlist"
+            value={searchData.year || "null"}
+            onChange={(e) =>
+              setSearchData((prev) => ({
+                ...prev,
+                year: e.target.value,
+              }))
             }
-          />
-          {isLoading ? (
+          >
+            <option value="null">Year</option>
+            {Array((new Date().getFullYear() % 100) + 1)
+              .fill(0)
+              .map((_, i) => (
+                <option key={i} value={i + 2000}>
+                  {i + 2000}
+                </option>
+              ))}
+          </select>
+
+          <select
+            id="status"
+            name="statuslist"
+            value={searchData.status || "null"}
+            onChange={(e) =>
+              setSearchData((prev) => ({
+                ...prev,
+                status: e.target.value,
+              }))
+            }
+          >
+            <option value="null">Status</option>
+            <option value="true">Succeed</option>
+            <option value="false">Failed</option>
+          </select>
+
+          <select
+            id="type"
+            name="typelist"
+            value={searchData.type || "null"}
+            onChange={(e) =>
+              setSearchData((prev) => ({
+                ...prev,
+                type: e.target.value,
+              }))
+            }
+          >
+            <option value="null">Type</option>
+            <option value="Merlin A">Merlin A</option>
+            <option value="Merlin C">Merlin C</option>
+            <option value="v1.0">v1.0</option>
+            <option value="v1.1">v1.1</option>
+            <option value="FT">FT</option>
+          </select>
+
+          <select
+            id="site"
+            name="sitelist"
+            value={searchData.site || "null"}
+            onChange={(e) =>
+              setSearchData((prev) => ({
+                ...prev,
+                site: e.target.value,
+              }))
+            }
+          >
+            <option value="null">Site</option>
+            <option value="KSC LC 39A">KSC LC 39A</option>
+            <option value="CCAFS SLC 40">CCAFS SLC 40</option>
+            <option value="VAFB SLC 4E">VAFB SLC 4E</option>
+          </select>
+        </div>
+        <div className="button flex items-center">
+          <div>
             <img
-              src={loader}
-              alt="loader"
-              className="w-12 mx-1 loader"
+              src={cross}
+              alt="cross"
+              className="w-4 cursor-pointer mx-1"
+              onClick={() =>
+                setSearchData({
+                  input: null,
+                  year: null,
+                  status: null,
+                  type: null,
+                  site: null,
+                })
+              }
             />
-          ) : (
-            <img
-              src={search}
-              alt="search"
-              className="w-12 cursor-pointer mx-1"
-              onClick={() => onSearch(searchData)}
-            />
-          )}
+          </div>
+          <div>
+            {isLoading ? (
+              <img src={loader} alt="loader" className="w-4 mx-1 loader" />
+            ) : (
+              <img
+                src={search}
+                alt="search"
+                className="w-4 cursor-pointer mx-1"
+                onClick={() => onSearch(searchData)}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

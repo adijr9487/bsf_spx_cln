@@ -80,15 +80,15 @@ const Vehicles = () => {
   return (
     <div className="h-screen bg-black relative">
       <h3
-        className="absolute top-8 right-8 text-slate-50 uppercase"
+        className="page-head absolute top-8 right-8 text-slate-50 uppercase"
         style={{ letterSpacing: "6px" }}
       >
         Vehicles
       </h3>
       <div className="pt-8">
-        <div className="w-4/5 text-slate-50 my-10 m-auto">
+        <div className="w-4/5 flex text-slate-50 my-10 m-auto">
           <button
-            className="button w-3/6 text-left hover:bg-stone-900 py-2"
+            className="transition-all duration-300 w-3/6 text-left hover:bg-stone-900 py-2"
             onClick={() => setSelectedVehicle("falcon")}
           >
             <p
@@ -102,7 +102,7 @@ const Vehicles = () => {
             </p>
           </button>
           <button
-            className="button w-3/6 text-right hover:bg-stone-900 py-2"
+            className="transition-all duration-300 w-3/6 flex justify-end text-right hover:bg-stone-900 py-2"
             onClick={() => setSelectedVehicle("dragon")}
           >
             <p
@@ -116,8 +116,8 @@ const Vehicles = () => {
             </p>
           </button>
         </div>
-        <div className="vehicle-body m-auto flex">  
-          <div className="vehicle-body m-auto w-4/5 flex justify-evenly">
+        <div className="vehicle-body m-auto flex overflow-x-scroll">  
+          <div className="vehicle-body m-auto flex justify-evenly">
             {data.map((vehicleData, index) => {
               if (selectedVehicle == vehicleData.type){
                 return <CarousalCard key={index} vehicleData={vehicleData} />;

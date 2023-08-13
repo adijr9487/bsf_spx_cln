@@ -5,10 +5,10 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <div className="footer bg-black text-white">
-      <div className="footer-top flex justify-center items-center">
+      <div className="footer-top flex justify-center items-center ">
         <div className="w-24 h-px bg-white"></div>
         <div className="flex items-center justify-center p-8">
-          <div className="logo">
+          <div className="head-logo">
             <img src={logo} style={{ width: "70px" }} alt="logo" />
           </div>
           <div className="social-links text-sm">
@@ -22,7 +22,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <div className="footer-bottom-menu flex text-neutral-400 mt-12 uppercase relative">
+        <div className="footer-bottom-menu flex text-neutral-400 pt-4 uppercase relative flex-wrap">
           <ul className="content mx-12">
             <li className="text-neutral-200 font-bold">Content</li>
             <li>Author</li>
@@ -62,7 +62,7 @@ const Footer = () => {
           </ul>
 
           <img
-            className="absolute right-5 top-0"
+            className="logo absolute right-5 top-0"
             style={{ width: "50px" }}
             src={logo}
             alt="logo"

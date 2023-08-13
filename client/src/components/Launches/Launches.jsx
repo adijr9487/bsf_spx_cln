@@ -27,7 +27,7 @@ const Launches = () => {
   return (
     <div id="missions" className="h-screen relative flex " style={{ background: "#141414" }}>
       <h3
-        className="absolute top-8 right-8 text-slate-50 uppercase"
+        className="page-head absolute top-8 right-8 text-slate-50 uppercase"
         style={{ letterSpacing: "6px" }}
       >
         Mission & Launches
@@ -39,7 +39,7 @@ const Launches = () => {
           }}
           isLoading={loading}
         />
-        <div className="px-20 my-4">
+        <div className="sm:px-20 my-4 text-xs sm:text-sm">
           <Row
             isHeader={true}
             data={{ ...data[0] }}

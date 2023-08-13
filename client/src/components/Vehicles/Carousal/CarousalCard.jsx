@@ -9,7 +9,7 @@ const CarousalCard = ({ vehicleData }) => {
   return (
     <div className="vehicle-card w-44 flex flex-col items-center pt-4">
       <div
-        className="svg h-full w-full flex items-end"
+        className="svg h-96 sm:h-full w-full flex items-end"
         style={{
           justifyContent:
             vehicleData.svgs.length > 1 ? "space-between" : "center",
@@ -37,7 +37,7 @@ const CarousalCard = ({ vehicleData }) => {
             alt={vehicleData.title}
             className={`${
               direction == "right" ? "right-appear" : "left-appear"
-            }`}
+            } h-96 sm:h-full`}
           />
           {previousIndex != null && (
             <img

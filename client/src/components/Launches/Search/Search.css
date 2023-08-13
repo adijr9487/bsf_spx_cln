@@ -21,7 +21,7 @@
 }
 .search select{
     width: 100%;
-    margin: 0 10px;
+    margin-right: 10px;
 
     /* style  */
     padding: 5px 10px;
@@ -47,5 +47,33 @@
     }
     100%{
         transform: rotate(360deg);
+    }
+}
+
+@media(max-width: 900px){
+    .search input{
+        width: 100%;
+        margin: 0 0 10px 0;
+    }
+    .search{
+        flex-flow: column;
+    }
+}
+@media(max-width: 550px){
+    .options{
+        flex-flow: column;
+    }
+    .button{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .button div{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
     }
 }

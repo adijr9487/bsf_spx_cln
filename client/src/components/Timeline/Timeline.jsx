@@ -37,7 +37,7 @@ const Timeline = () => {
       style={{ background: "#0a0a0a" }}
     >
       <h3
-        className="absolute top-8 right-8 text-slate-50 uppercase"
+        className="page-head absolute top-8 right-8 text-slate-50 uppercase"
         style={{ letterSpacing: "6px" }}
       >
         Timeline

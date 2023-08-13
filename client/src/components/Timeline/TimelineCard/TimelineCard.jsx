@@ -26,14 +26,14 @@ const TimelineCard = ({ data }) => {
 
   return (
     <div
-      className="px-8 pt-4 flex flex-col text-white bg-black border-0 rounded-md transition-all duration-1"
+      className="box px-8 pt-4 flex flex-col text-white bg-black border-0 rounded-md transition-all duration-1"
       style={{ boxShadow: "0px 0px 10px #141414" }}
     >
-      <h2 className="title text-2xl text-neutral-300">{data.title}</h2>
+      <h2 className="title text-md sm:text-xl md:text-2xl text-neutral-300">{data.title}</h2>
       <p className="text-right text-neutral-500 text-xs">
         {data.event_date_utc}
       </p>
-      <p className="details text-neutral-300 max-h-32 overflow-y-scroll">
+      <p className="details text-sm sm:text-md text-neutral-300 max-h-32 overflow-y-scroll">
         {data.details}
       </p>
       <div
@@ -46,18 +46,18 @@ const TimelineCard = ({ data }) => {
           <>
             <div className="header">
               <div className="px-4 pt-4 header-top flex justify-between text-gray-950">
-                <h3 className="text-2xl">{details.mission_name}</h3>
+                <h3 className="text-md sm:text-xl md:text-2xl">{details.mission_name}</h3>
                 <p>{details.rocket_name}</p>
               </div>
               <p className="text-slate-800 px-4 text-xs">
                 {details.launch_date}
               </p>
-              <p className="text-slate-800 px-4 py-2 text-xs">
+              <p className="text-slate-800 text-md px-4 py-2 text-xs">
                 {details.site_long_name}
               </p>
             </div>
             {details && details.details && (
-              <div className="flight-details mx-4 py-2 border-t-2 text-gray-950 max-h-32 overflow-y-scroll">
+              <div className="flight-details text-sm sm:text-md mx-4 py-2 border-t-2 text-gray-950 max-h-32 overflow-y-scroll">
                 {details.details}
               </div>
             )}

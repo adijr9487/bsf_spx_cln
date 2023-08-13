@@ -1,8 +1,14 @@
-.button{
-    transition: 0.3s;
-}
 .btn-txt{
     display: inline;
     border: 2px solid transparent;
     transition: 0.3s;
+}
+.vehicle-body::-webkit-scrollbar {
+    display: none;
+}
+@media(max-width: 500px){
+    .page-head{
+        letter-spacing: 3px;
+        font-size: 0.8rem;
+    }
 }

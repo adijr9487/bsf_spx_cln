@@ -20,3 +20,13 @@
 .footer-bottom-copyright{
     font-size: 0.8rem;
 }
+@media(max-width: 1000px){
+    .logo{
+        display: none;
+    }
+}
+@media(max-width: 520px){
+    .footer-top{
+        display: none;
+    }
+}

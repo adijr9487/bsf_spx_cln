@@ -9,3 +9,18 @@
     background: white; 
     border-radius: 10px;
 }
+
+@media(max-width: 900px){
+    .items{
+        max-height: 60vh;
+    }
+}
+
+@media(max-width: 500px){
+    .launches-body{
+        font-size: 0.6rem !important;
+    }
+    .launches-body div{
+        font-size: 0.6rem !important;
+    }
+}
