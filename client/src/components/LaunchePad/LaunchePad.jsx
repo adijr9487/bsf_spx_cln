@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./LaunchePad.css";
 import rocket from "../../Utility/Asset/svgs/rocket.svg";
 import location from "../../Utility/Asset/svgs/location.svg";
-import axios from "axios";
+import axiosInstance from "../../Utility/helper-component/Axios/RequestHandler";
 import { UserContext } from "../../context/UserContext";
 import { NotifyContext } from "../../context/NotifyContext";
 
@@ -19,12 +19,10 @@ const LaunchePad = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    axios
+    axiosInstance
       .post(
         "http://localhost:5000/api/spacex/pads",
-        {},
-        { withCredentials: true }
-      )
+        {})
       .then((res) => {
         setData(res.data.data);
         setLoading(false);

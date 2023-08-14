@@ -10,7 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./context/UserContext";
 import { NotifyContext } from "./context/NotifyContext";
 import Notify from "./Utility/helper-component/Notify/Notify";
-import axios from "axios";
+import axiosInstance from "../src/Utility/helper-component/Axios/RequestHandler";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
@@ -18,12 +18,8 @@ function App() {
   const [showModel, setShowModel] = useState(false);
 
   const fetchUser = () => {
-    axios
-      .post(
-        "http://localhost:5000/api/auth/user",
-        {},
-        { withCredentials: true }
-      )
+    axiosInstance
+      .post("api/auth/user", {})
       .then((res) => {
         if (res.status == 200) {
           setNotify({

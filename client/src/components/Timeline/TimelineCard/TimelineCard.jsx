@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./TimelineCard.css";
-import axios from "axios";
+import axiosInstance from "../../../Utility/helper-component/Axios/RequestHandler";
 
 const TimelineCard = ({ data }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -8,12 +8,8 @@ const TimelineCard = ({ data }) => {
   const [details, setDetails] = useState(null); // details of the flight
   const fetchDetails = (flightNumber) => {
     setLoading(true);
-    axios
-      .post(
-        `http://localhost:5000/api/spacex/pads/${flightNumber}`,
-        {},
-        { withCredentials: true }
-      )
+    axiosInstance
+      .post(`http://localhost:5000/api/spacex/pads/${flightNumber}`, {})
       .then((res) => {
         setDetails(res.data.data);
         setLoading(false);
@@ -29,7 +25,9 @@ const TimelineCard = ({ data }) => {
       className="box px-8 pt-4 flex flex-col text-white bg-black border-0 rounded-md transition-all duration-1"
       style={{ boxShadow: "0px 0px 10px #141414" }}
     >
-      <h2 className="title text-md sm:text-xl md:text-2xl text-neutral-300">{data.title}</h2>
+      <h2 className="title text-md sm:text-xl md:text-2xl text-neutral-300">
+        {data.title}
+      </h2>
       <p className="text-right text-neutral-500 text-xs">
         {data.event_date_utc}
       </p>
@@ -38,7 +36,9 @@ const TimelineCard = ({ data }) => {
       </p>
       <div
         className={`mt-4 border-0 rounded-md transition-all duration-1 h-0 ${
-          !loading && showDetails && (details && details.details ? "expended" : "h-32")
+          !loading &&
+          showDetails &&
+          (details && details.details ? "expended" : "h-32")
         }`}
         style={{ background: "#DADADA" }}
       >
@@ -46,7 +46,9 @@ const TimelineCard = ({ data }) => {
           <>
             <div className="header">
               <div className="px-4 pt-4 header-top flex justify-between text-gray-950">
-                <h3 className="text-md sm:text-xl md:text-2xl">{details.mission_name}</h3>
+                <h3 className="text-md sm:text-xl md:text-2xl">
+                  {details.mission_name}
+                </h3>
                 <p>{details.rocket_name}</p>
               </div>
               <p className="text-slate-800 px-4 text-xs">

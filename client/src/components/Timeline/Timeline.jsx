@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Timeline.css";
 import TimelineCard from "./TimelineCard/TimelineCard";
-import axios from "axios";
+import axiosInstance from "../../Utility/helper-component/Axios/RequestHandler";
 import { UserContext } from "../../context/UserContext";
 
 const Timeline = () => {
@@ -11,12 +11,8 @@ const Timeline = () => {
 
   const fetchData = () => {
     setLoading(true);
-    axios
-      .post(
-        "http://localhost:5000/api/spacex/history",
-        {},
-        { withCredentials: true }
-      )
+    axiosInstance
+      .post("http://localhost:5000/api/spacex/history", {})
       .then((res) => {
         setData(res.data.data);
         setLoading(false);

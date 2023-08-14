@@ -2,23 +2,27 @@ import React, { useState, useContext } from "react";
 import "./Launches.css";
 import Search from "./Search/Search";
 import Row from "./Row/Row";
-import axios from "axios";
+import axiosInstance from "../../Utility/helper-component/Axios/RequestHandler";
 import { NotifyContext } from "../../context/NotifyContext";
 
 const Launches = () => {
   const [data, setData] = useState([]); // data from api
   const [loading, setLoading] = useState(false); // loading state
   const { setNotify } = useContext(NotifyContext); // notify context
+
   const fetchData = async (filterData) => {
     setLoading(true);
-    axios
+    axiosInstance
       .post(
-        `http://localhost:5000/api/spacex/mission/${filterData.year}/${filterData.status}/${filterData.type}/${filterData.site}/${filterData.input}`,
-        {},
-        { withCredentials: true }
+        `api/spacex/mission/${filterData.year}/${filterData.status}/${filterData.type}/${filterData.site}/${filterData.input}`,
+        {}
       )
       .then((res) => {
         setData(res.data.data);
+        setNotify({
+          color: "bg-green-500",
+          message: "Search Successful",
+        });
         setLoading(false);
       })
       .catch((err) => {

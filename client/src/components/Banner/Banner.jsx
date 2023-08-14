@@ -9,8 +9,7 @@ import dragon from "../../Utility/Asset/svgs/dragon.svg";
 import "./Banner.css";
 import { UserContext } from "../../context/UserContext";
 import { NotifyContext } from "../../context/NotifyContext";
-import axios from "axios";
-import Notify from "../../Utility/helper-component/Notify/Notify";
+import axiosInstance from "../../Utility/helper-component/Axios/RequestHandler";
 
 const navigation = [
   { name: "Launch Pad", href: "#launch_pad" },
@@ -43,12 +42,8 @@ const Banner = ({ viewModel }) => {
   const { user, setUser } = useContext(UserContext);
   const { setNotify } = useContext(NotifyContext);
   const logoutHandler = () => {
-    axios
-      .post(
-        "http://localhost:5000/api/auth/logout",
-        {},
-        { withCredentials: true }
-      )
+    axiosInstance
+      .post("http://localhost:5000/api/auth/logout", {})
       .then((res) => {
         console.log(res);
         setUser(null);

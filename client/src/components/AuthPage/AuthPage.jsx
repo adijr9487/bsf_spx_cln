@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
-import axios from "axios";
+import axiosInstance from "../../Utility/helper-component/Axios/RequestHandler";
 import "./AuthPage.css";
-import Notify from "../../Utility/helper-component/Notify/Notify";
 import { NotifyContext } from "../../context/NotifyContext";
+import { UserContext } from "../../context/UserContext";
 
 const AuthPage = ({ closeModel }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,10 +11,9 @@ const AuthPage = ({ closeModel }) => {
     password: null,
     confirmed: null,
   });
-  const [notif, setNotif] = useState(null);
   const [error, setError] = useState(null);
   const { setUser } = useContext(UserContext);
-  const { notify, setNotify } = useContext(NotifyContext);
+  const { setNotify } = useContext(NotifyContext);
 
   const validator = (data) => {
     if (!data.email || !data.password) {
@@ -40,27 +38,24 @@ const AuthPage = ({ closeModel }) => {
       //submit form
       return;
     }
-    axios
+    axiosInstance
       .post(
         `http://localhost:5000/api/auth/${isLogin ? "signin" : "signup"}`,
-        formData,
-        {
-          withCredentials: true,
-        }
+        formData
       )
       .then((res) => {
         if (res.data._id) {
           setUser(res.data);
           setNotify({
-            color: 'bg-green-700',
-            message: 'Logged In successfully'
+            color: "bg-green-700",
+            message: "Logged In successfully",
           });
         }
       })
       .catch((err) => {
         setNotify({
-          color: 'bg-red-700',
-          message: err.response.data.message
+          color: "bg-red-700",
+          message: err.response.data.message,
         });
       });
   };
