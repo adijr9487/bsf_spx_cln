@@ -57,8 +57,17 @@ Before you begin, make sure you have the following installed:
     ```
 
 ### Usage
+1. Add .env in-order to connect with MongoDB database and JWT Secret
+    ```bash
+    touch .env
+    ```
 
-1. Start Node Server and React Server
+    ```bash
+    MONGO_URI=mongodb+srv://<username>:T4ngjvubuaXbyqAm@<project_name>.<password>.mongodb.net/?retryWrites=true&w=majority
+    JWT_SECRET=<random_string>
+    ```
+
+2. Start Node Server and React Server
 
     ```bash
     node server.js #on root folder
